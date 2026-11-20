@@ -1,12 +1,39 @@
-html, body { margin: 0; height: 100%; background: #f2f0f4; color: #1d1b22; font: 15px/1.4 system-ui, sans-serif; }
-.app { display: flex; gap: 32px; align-items: center; justify-content: center; height: 100%; padding: 24px; box-sizing: border-box; }
-.controls { display: flex; flex-direction: column; gap: 14px; width: 280px; }
-.controls h1 { margin: 0; font-size: 28px; }
-.controls p { margin: 0; color: #5c5866; }
-label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; }
-input[type=text] { font: inherit; padding: 8px; border: 1px solid #c9c4d1; border-radius: 6px; }
-button { font: inherit; font-weight: 700; padding: 10px; border: 0; border-radius: 6px; background: #1d1b22; color: #fff; cursor: pointer; }
-canvas { width: min(70vh, 60vw); height: min(70vh, 60vw); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); }
+html, body { margin: 0; min-height: 100%; background: #14091f; color: #f5eef7; font: 15px/1.45 system-ui, -apple-system, sans-serif; }
+.app { display: flex; gap: 24px; padding: 20px; box-sizing: border-box; max-width: 1480px; margin: 0 auto; align-items: flex-start; }
+.controls { width: 360px; flex: none; background: #1e0f2c; border: 1px solid #3a1d52; border-radius: 16px; padding: 20px; box-sizing: border-box; }
+.controls h1 { margin: 0; font-size: 34px; letter-spacing: 2px; color: #ffd978; }
+.lede { color: #d9c6e6; margin: 6px 0 4px; }
+.controls h2 { font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: #ff8fb0; margin: 18px 0 8px; }
+.moments { display: grid; gap: 8px; }
+.moment { border: 1px solid #3a1d52; border-radius: 10px; padding: 10px; cursor: pointer; background: #241238; }
+.moment.active { border-color: #ff5e78; box-shadow: 0 0 0 1px #ff5e78; }
+.moment strong { display: block; font-size: 13px; margin-bottom: 6px; }
+.moment label { font-size: 13px; color: #d9c6e6; }
+.moment input[type=file] { display: block; margin-top: 4px; font-size: 12px; color: #f5eef7; }
+.moment button { margin-top: 8px; }
+.hint { font-size: 12.5px; color: #b9a3cc; margin: 8px 0 0; }
+label { display: flex; flex-direction: column; gap: 5px; font-weight: 600; font-size: 13px; }
+label.slider span { float: right; }
+input[type=text] { font: inherit; padding: 9px 10px; border: 1px solid #4a2a66; border-radius: 8px; background: #160a24; color: #fff; }
+input[type=range] { width: 100%; accent-color: #ff5e78; }
+.tags { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 10px; }
+.tags label { font-size: 12px; }
+.group { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.group button, .moment button { font: inherit; font-size: 13px; font-weight: 700; padding: 8px 10px; border: 1px solid #4a2a66; border-radius: 8px; background: #2a1740; color: #f5eef7; cursor: pointer; }
+.group button.on { background: #ff5e78; border-color: #ff5e78; color: #fff; }
+.actions { display: flex; gap: 8px; margin-top: 12px; }
+#export { flex: 1; font: inherit; font-weight: 800; padding: 12px; border: 0; border-radius: 10px; background: #ffd978; color: #241238; cursor: pointer; }
+#shuffle { font: inherit; font-weight: 700; padding: 12px; border: 1px solid #4a2a66; border-radius: 10px; background: #2a1740; color: #f5eef7; cursor: pointer; }
+#status { color: #8fe3d4; font-size: 13px; min-height: 18px; }
+.fine { font-size: 12px; color: #9c86ad; }
+.preview { flex: 1; position: sticky; top: 20px; display: flex; justify-content: center; }
+.preview canvas { width: min(100%, 78vh); height: auto; border-radius: 12px; box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55); cursor: grab; background: #160a24; }
 body.shot-cover .controls { display: none; }
-body.shot-cover .app { padding: 0; }
-body.shot-cover canvas { width: 100vw; height: 100vh; box-shadow: none; }
+body.shot-cover .app { padding: 0; max-width: none; }
+body.shot-cover .preview { position: static; }
+body.shot-cover .preview canvas { width: 100vw; height: 100vh; object-fit: contain; border-radius: 0; box-shadow: none; }
+@media (max-width: 900px) {
+  .app { flex-direction: column; }
+  .controls { width: 100%; }
+  .preview { position: static; width: 100%; }
+}

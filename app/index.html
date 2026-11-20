@@ -3,20 +3,85 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
+<title>Vice Story — GTA 6-style cover maker</title>
+<link rel="icon" href="data:,">
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
-    <p id="status" role="status"></p>
+  <section class="panel controls" aria-label="Cover controls">
+    <h1>VICE STORY</h1>
+    <p class="lede">Three photo moments, one Vice City cover. Pick a photo for each panel, crop it, write the caption, export the PNG.</p>
+
+    <h2>1 · Your three moments</h2>
+    <div class="moments">
+      <div class="moment active" data-panel="0">
+        <strong>Panel 1 · Sunset Street</strong>
+        <label>Upload a photo <input class="pick" type="file" accept="image/*"></label>
+        <button class="sample" type="button">Use sample moment</button>
+      </div>
+      <div class="moment" data-panel="1">
+        <strong>Panel 2 · Neon Night</strong>
+        <label>Upload a photo <input class="pick" type="file" accept="image/*"></label>
+        <button class="sample" type="button">Use sample moment</button>
+      </div>
+      <div class="moment" data-panel="2">
+        <strong>Panel 3 · Beach Heist</strong>
+        <label>Upload a photo <input class="pick" type="file" accept="image/*"></label>
+        <button class="sample" type="button">Use sample moment</button>
+      </div>
+    </div>
+    <p class="hint">Click a panel on the cover to select it, then drag to move it and scroll to zoom it.</p>
+
+    <h2>2 · Crop the selected panel</h2>
+    <label class="slider">Zoom <span id="zoomVal">100%</span>
+      <input id="zoom" type="range" min="1" max="3" step="0.01" value="1">
+    </label>
+    <label class="slider">Move left–right
+      <input id="panx" type="range" min="-1" max="1" step="0.01" value="0">
+    </label>
+    <label class="slider">Move up–down
+      <input id="pany" type="range" min="-1" max="1" step="0.01" value="0">
+    </label>
+
+    <h2>3 · Layout &amp; grade</h2>
+    <div class="group" data-group="layout">
+      <button type="button" data-value="triptych" class="on">Triptych</button>
+      <button type="button" data-value="hero">Hero Split</button>
+      <button type="button" data-value="strip">Sunset Strip</button>
+    </div>
+    <div class="group" data-group="grade">
+      <button type="button" data-value="sunset" class="on">Vice Sunset</button>
+      <button type="button" data-value="neon">Neon Night</button>
+      <button type="button" data-value="gold">Beach Gold</button>
+      <button type="button" data-value="teal">Heist Teal</button>
+    </div>
+
+    <h2>4 · Words</h2>
+    <label>Caption <input id="caption" type="text" maxlength="40" value="VICE STORY"></label>
+    <label>Sub-caption <input id="sub" type="text" maxlength="60" value="Three moments. One city."></label>
+    <div class="tags">
+      <label>Chapter 1 <input id="tag0" type="text" maxlength="16" value="CH.01 SUNSET"></label>
+      <label>Chapter 2 <input id="tag1" type="text" maxlength="16" value="CH.02 NEON"></label>
+      <label>Chapter 3 <input id="tag2" type="text" maxlength="16" value="CH.03 HEIST"></label>
+    </div>
+
+    <h2>5 · Post size &amp; export</h2>
+    <div class="group" data-group="size">
+      <button type="button" data-value="square" class="on">1080 × 1080</button>
+      <button type="button" data-value="portrait">1080 × 1350</button>
+      <button type="button" data-value="wide">1920 × 1080</button>
+    </div>
+    <div class="actions">
+      <button id="export" type="button">Export PNG</button>
+      <button id="shuffle" type="button">Next grade</button>
+    </div>
+    <p id="status" role="status">Three sample moments loaded — swap any panel for your own photo.</p>
+    <p class="fine">Original art only. No Rockstar logo, artwork, character or font. Works fully offline; your photos never leave your machine.</p>
   </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+  <section class="preview" aria-label="Live cover preview">
+    <canvas id="cover" width="1080" height="1080"></canvas>
+  </section>
 </main>
 <script type="module" src="./src/main.js"></script>
 </body>
